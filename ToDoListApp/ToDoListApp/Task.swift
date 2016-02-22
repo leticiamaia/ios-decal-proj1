@@ -41,9 +41,9 @@ class Task {
     }
     
     func isExpired() -> Bool {
-        if isCompleted && expirationTime().compare(NSDate()) ==  NSComparisonResult.OrderedAscending {
-           return false
+        if isCompleted && (expirationTime().compare(NSDate()) ==  NSComparisonResult.OrderedAscending) {
+           return true
         }
-        return true
+        return false
     }
 }

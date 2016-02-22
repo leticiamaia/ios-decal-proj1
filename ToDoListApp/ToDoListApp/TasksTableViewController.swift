@@ -39,12 +39,13 @@ class TasksTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-       /* for i in tasks.indices {
+        super.viewWillAppear(animated);
+        for i in tasks.indices.reverse() {
             if tasks[i].isExpired() {
                 tasks.removeAtIndex(i)
             }
-        }*/
-        super.viewWillAppear(animated);
+        }
+        self.tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -53,6 +54,11 @@ class TasksTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TaskTableViewCell
         let task = tasks[indexPath.row]
         cell.taskName.text = task.getTaskName()
+        if(task.getIsCompleted()) {
+            cell.backgroundColor = UIColor.greenColor()
+        } else {
+            cell.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        }
 
         return cell
     }
@@ -71,15 +77,15 @@ class TasksTableViewController: UITableViewController {
             self.editing = false
             self.tasks.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.tableView.reloadData()
         }
         let checkTaskDone = UITableViewRowAction(style: .Normal, title: "Done") { (action, indexPath) in
             self.editing = false
-            let cell = tableView.cellForRowAtIndexPath(indexPath)!
-            cell.contentView.backgroundColor = UIColor.greenColor()
             let finishedTask = self.tasks[indexPath.row]
             finishedTask.setIsCompleted(true)
             finishedTask.setCompletionTime(NSDate())
-          //  self.tasks.insert(finishedTask, atIndex: indexPath.row)
+            self.tableView.reloadData()
+
         }
         checkTaskDone.backgroundColor = UIColor.greenColor()
         return [checkTaskDone, deleteAction]
