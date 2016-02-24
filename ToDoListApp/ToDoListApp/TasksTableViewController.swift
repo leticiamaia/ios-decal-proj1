@@ -71,11 +71,14 @@ class TasksTableViewController: UITableViewController {
         let cellIdentifier = "TaskCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TaskTableViewCell
         let task = tasks[indexPath.row]
-        cell.taskName.text = task.taskName
         if(task.isCompleted) {
-            cell.backgroundColor = UIColor.greenColor()
+            let attributes = [NSStrikethroughStyleAttributeName: 1]
+            let attributedTaskName = NSAttributedString(string: task.taskName, attributes: attributes)
+            cell.taskName.attributedText = attributedTaskName
+           // cell.backgroundColor = UIColor.greenColor()
         } else {
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.taskName.text = task.taskName
+            //cell.backgroundColor = UIColor.whiteColor()
         }
         return cell
     }
