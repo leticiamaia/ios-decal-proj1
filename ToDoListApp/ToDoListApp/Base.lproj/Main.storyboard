@@ -22,16 +22,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9O-dU-vkz">
-                                            <rect key="frame" x="19" y="8" width="563" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="⭐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DuM-B6-MAs">
+                                            <rect key="frame" x="18" y="7" width="22" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9O-dU-vkz">
+                                            <rect key="frame" x="58" y="7" width="506" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="c9O-dU-vkz" firstAttribute="leading" secondItem="DuM-B6-MAs" secondAttribute="trailing" constant="18" id="I4o-xF-OYM"/>
+                                        <constraint firstItem="DuM-B6-MAs" firstAttribute="leading" secondItem="Q5v-fT-yCt" secondAttribute="leadingMargin" constant="10" id="XrN-cr-ozm"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <gestureRecognizers/>
                                 <connections>
+                                    <outlet property="isImportantLabel" destination="DuM-B6-MAs" id="c44-81-fVF"/>
                                     <outlet property="taskName" destination="c9O-dU-vkz" id="UF3-XS-fuU"/>
                                 </connections>
                             </tableViewCell>
@@ -80,9 +91,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important ⭐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tH0-1c-c36">
+                                <rect key="frame" x="249" y="152" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltU-w2-UVK">
+                                <rect key="frame" x="275" y="181" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ltU-w2-UVK" firstAttribute="top" secondItem="tH0-1c-c36" secondAttribute="bottom" constant="8" id="2E4-EP-Sc8"/>
+                            <constraint firstItem="tH0-1c-c36" firstAttribute="centerX" secondItem="wq1-j3-Dro" secondAttribute="centerX" id="2NR-jn-Vo4"/>
+                            <constraint firstItem="ltU-w2-UVK" firstAttribute="centerX" secondItem="wq1-j3-Dro" secondAttribute="centerX" id="3fG-Sl-3OO"/>
+                            <constraint firstItem="tH0-1c-c36" firstAttribute="top" secondItem="FZz-gq-DPY" secondAttribute="bottom" constant="28" id="6cd-qa-vaT"/>
                             <constraint firstItem="FZz-gq-DPY" firstAttribute="centerX" secondItem="wq1-j3-Dro" secondAttribute="centerX" id="95f-tZ-rRq"/>
                             <constraint firstItem="FZz-gq-DPY" firstAttribute="centerX" secondItem="wq1-j3-Dro" secondAttribute="centerX" id="NHn-ij-CWE"/>
                             <constraint firstItem="FZz-gq-DPY" firstAttribute="top" secondItem="Nbh-Dk-8wc" secondAttribute="bottom" constant="30" id="bCw-r0-lrs"/>
@@ -109,6 +133,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="priorityUISwich" destination="ltU-w2-UVK" id="X68-Dg-4WD"/>
                         <outlet property="saveButton" destination="ECz-Cs-6ax" id="OEi-ku-daK"/>
                         <outlet property="taskNameTextField" destination="FZz-gq-DPY" id="leU-Dy-tCO"/>
                     </connections>
@@ -169,7 +194,7 @@
                     <navigationItem key="navigationItem" id="EeI-oG-sgt">
                         <barButtonItem key="leftBarButtonItem" title="Tasks" id="qzF-hK-F49">
                             <connections>
-                                <segue destination="1sb-6B-8UP" kind="presentation" id="TDV-Do-nRN"/>
+                                <segue destination="tmn-0p-DPZ" kind="presentation" id="o5E-cj-sze"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -181,10 +206,10 @@
             </objects>
             <point key="canvasLocation" x="861" y="-1041"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--TasksTableNavigator-->
         <scene sceneID="SUy-i9-a7C">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tmn-0p-DPZ" sceneMemberID="viewController">
+                <navigationController title="TasksTableNavigator" automaticallyAdjustsScrollViewInsets="NO" id="tmn-0p-DPZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M8R-QE-wXp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -199,10 +224,10 @@
             </objects>
             <point key="canvasLocation" x="676" y="-15"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--NewTaskNavigator-->
         <scene sceneID="02m-ma-97w">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1sb-6B-8UP" sceneMemberID="viewController">
+                <navigationController title="NewTaskNavigator" automaticallyAdjustsScrollViewInsets="NO" id="1sb-6B-8UP" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rCY-Qd-GL3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -217,10 +242,10 @@
             </objects>
             <point key="canvasLocation" x="1558" y="146"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--StatsNavigator-->
         <scene sceneID="ubJ-Eh-9UU">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gz7-pA-uvG" sceneMemberID="viewController">
+                <navigationController title="StatsNavigator" automaticallyAdjustsScrollViewInsets="NO" id="gz7-pA-uvG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ptd-jc-IoT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -237,6 +262,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="TDV-Do-nRN"/>
+        <segue reference="o5E-cj-sze"/>
     </inferredMetricsTieBreakers>
 </document>

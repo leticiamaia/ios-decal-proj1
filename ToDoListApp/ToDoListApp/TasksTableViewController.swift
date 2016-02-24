@@ -9,6 +9,7 @@
 import UIKit
 
 class TasksTableViewController: UITableViewController {
+
     
     @IBOutlet weak var statsBarButtonItem: UIBarButtonItem!
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -31,7 +32,7 @@ class TasksTableViewController: UITableViewController {
         if let decodedTasks = defaults.objectForKey(tasksKey) as? NSData {
             self.tasks = NSKeyedUnarchiver.unarchiveObjectWithData(decodedTasks) as! [Task]
         } else {
-            tasks += [Task(taskName: "Hello Leticia")]
+            tasks += [Task(taskName: "Hello Leticia", isImportant: false)]
         }
         
     }
@@ -71,6 +72,12 @@ class TasksTableViewController: UITableViewController {
         let cellIdentifier = "TaskCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TaskTableViewCell
         let task = tasks[indexPath.row]
+        if(task.isImportant) {
+            cell.isImportantLabel.hidden = false
+        } else {
+            cell.isImportantLabel.hidden = true
+        }
+        
         if(task.isCompleted) {
             let attributes = [NSStrikethroughStyleAttributeName: 1]
             let attributedTaskName = NSAttributedString(string: task.taskName, attributes: attributes)

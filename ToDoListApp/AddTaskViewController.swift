@@ -14,6 +14,8 @@ class AddTaskViewController: UIViewController {
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    @IBOutlet weak var priorityUISwich: UISwitch!
+    
     var task: Task!
     
     override func viewDidLoad() {
@@ -21,6 +23,7 @@ class AddTaskViewController: UIViewController {
          saveButton.enabled = false
         taskNameTextField.addTarget(self, action: "checkFieldEmpty", forControlEvents: .EditingChanged)
         // Do any additional setup after loading the view.
+        priorityUISwich.setOn(false, animated: false)
     }
     
     func checkFieldEmpty() {
@@ -46,7 +49,8 @@ class AddTaskViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if saveButton === sender {
             let name: String = taskNameTextField.text ?? ""
-            task = Task(taskName: name)
+            let isImportant = priorityUISwich.on
+            task = Task(taskName: name, isImportant: isImportant)
         }
     }
     
