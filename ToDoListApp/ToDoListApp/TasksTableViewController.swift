@@ -10,6 +10,10 @@ import UIKit
 
 class TasksTableViewController: UITableViewController {
     
+    @IBOutlet weak var statsBarButtonItem: UIBarButtonItem!
+    let defaults = NSUserDefaults.standardUserDefaults()
+    let tasksKey = "tasksKey"
+    
     var tasks = [Task]()
     
     override func viewDidLoad() {
@@ -20,9 +24,22 @@ class TasksTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        tasks += [Task(taskName: "Hello Leticia")]
+        loadTasks()
     }
-
+    
+    func loadTasks() {
+        if let decodedTasks = defaults.objectForKey(tasksKey) as? NSData {
+            self.tasks = NSKeyedUnarchiver.unarchiveObjectWithData(decodedTasks) as! [Task]
+        } else {
+            tasks += [Task(taskName: "Hello Leticia")]
+        }
+        
+    }
+    
+    func saveTasks() {
+        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(tasks), forKey: tasksKey)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,6 +62,7 @@ class TasksTableViewController: UITableViewController {
                 tasks.removeAtIndex(i)
             }
         }
+        saveTasks()
         self.tableView.reloadData()
     }
     
@@ -53,13 +71,12 @@ class TasksTableViewController: UITableViewController {
         let cellIdentifier = "TaskCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TaskTableViewCell
         let task = tasks[indexPath.row]
-        cell.taskName.text = task.getTaskName()
-        if(task.getIsCompleted()) {
+        cell.taskName.text = task.taskName
+        if(task.isCompleted) {
             cell.backgroundColor = UIColor.greenColor()
         } else {
-            cell.backgroundColor = UIColor.groupTableViewBackgroundColor()
+            cell.backgroundColor = UIColor.whiteColor()
         }
-
         return cell
     }
   
@@ -77,13 +94,17 @@ class TasksTableViewController: UITableViewController {
             self.editing = false
             self.tasks.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.saveTasks()
             self.tableView.reloadData()
         }
         let checkTaskDone = UITableViewRowAction(style: .Normal, title: "Done") { (action, indexPath) in
             self.editing = false
-            let finishedTask = self.tasks[indexPath.row]
-            finishedTask.setIsCompleted(true)
-            finishedTask.setCompletionTime(NSDate())
+            let task = self.tasks[indexPath.row]
+            if(!task.isCompleted) {
+                task.isCompleted = true
+                task.completionTime = NSDate()
+            }
+            self.saveTasks()
             self.tableView.reloadData()
 
         }
@@ -117,17 +138,32 @@ class TasksTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    */
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if(sender === statsBarButtonItem) {
+            loadTasks()
+            let nav = segue.destinationViewController as! UINavigationController
+            let destinationViewController = nav.topViewController as! StatsViewController
+            var counter: Int = 0
+            for task in tasks {
+              if task.isCompleted {
+                counter += 1
+              }
+            }
+            print(counter)
+            destinationViewController.numberOfExpiredTasks = counter
+        }
     }
-    */
     
     @IBAction func unwindToTaskList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? AddTaskViewController, task = sourceViewController.task {
             let newIndexPath = NSIndexPath(forRow: tasks.count, inSection: 0)
             tasks.append(task)
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+            saveTasks()
         }
     }
 

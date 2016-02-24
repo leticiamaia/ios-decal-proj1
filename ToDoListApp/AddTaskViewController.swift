@@ -18,10 +18,19 @@ class AddTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+         saveButton.enabled = false
+        taskNameTextField.addTarget(self, action: "checkFieldEmpty", forControlEvents: .EditingChanged)
         // Do any additional setup after loading the view.
     }
-
+    
+    func checkFieldEmpty() {
+        if taskNameTextField.text != nil && taskNameTextField.text!.isEmpty {
+            saveButton.enabled = false
+        } else {
+            saveButton.enabled = true
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

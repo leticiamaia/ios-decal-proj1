@@ -18,6 +18,7 @@
 		921B40021C79AF4F00FC9193 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B40011C79AF4F00FC9193 /* TaskTableViewCell.swift */; };
 		921B40061C7A754100FC9193 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B40051C7A754100FC9193 /* AddTaskViewController.swift */; };
 		921B40081C7AFBDF00FC9193 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B40071C7AFBDF00FC9193 /* Task.swift */; };
+		921B40121C7C3DE400FC9193 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921B40111C7C3DE400FC9193 /* StatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		921B40011C79AF4F00FC9193 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		921B40051C7A754100FC9193 /* AddTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddTaskViewController.swift; path = ../AddTaskViewController.swift; sourceTree = "<group>"; };
 		921B40071C7AFBDF00FC9193 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		921B40111C7C3DE400FC9193 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				921B40051C7A754100FC9193 /* AddTaskViewController.swift */,
 				921B3FFF1C79A52C00FC9193 /* TasksTableViewController.swift */,
+				921B40111C7C3DE400FC9193 /* StatsViewController.swift */,
 				921B3FCF1C791A8B00FC9193 /* AppDelegate.swift */,
 				921B3FD11C791A8B00FC9193 /* ViewController.swift */,
 				921B3FD31C791A8B00FC9193 /* Main.storyboard */,
@@ -272,6 +275,7 @@
 				921B40001C79A52C00FC9193 /* TasksTableViewController.swift in Sources */,
 				921B3FD21C791A8B00FC9193 /* ViewController.swift in Sources */,
 				921B3FD01C791A8B00FC9193 /* AppDelegate.swift in Sources */,
+				921B40121C7C3DE400FC9193 /* StatsViewController.swift in Sources */,
 				921B40081C7AFBDF00FC9193 /* Task.swift in Sources */,
 				921B40061C7A754100FC9193 /* AddTaskViewController.swift in Sources */,
 			);
