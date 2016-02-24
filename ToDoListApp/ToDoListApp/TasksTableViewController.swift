@@ -75,10 +75,8 @@ class TasksTableViewController: UITableViewController {
             let attributes = [NSStrikethroughStyleAttributeName: 1]
             let attributedTaskName = NSAttributedString(string: task.taskName, attributes: attributes)
             cell.taskName.attributedText = attributedTaskName
-           // cell.backgroundColor = UIColor.greenColor()
         } else {
             cell.taskName.text = task.taskName
-            //cell.backgroundColor = UIColor.whiteColor()
         }
         return cell
     }
@@ -156,7 +154,6 @@ class TasksTableViewController: UITableViewController {
                 counter += 1
               }
             }
-            print(counter)
             destinationViewController.numberOfExpiredTasks = counter
         }
     }
